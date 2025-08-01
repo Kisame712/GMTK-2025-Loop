@@ -6,8 +6,14 @@ public class PlaneController : MonoBehaviour
     [Header("Speed controls")]
     [SerializeField] private float maxForwardSpeed;
     [SerializeField] private float speedIncrement;
-    [SerializeField] private float responsiveness;
-    private float responseModifier { get { return planeRb.mass / 10  * responsiveness; } }
+    [SerializeField] private float tiltResponsiveness;
+    [SerializeField] private float turnResponsiveness;
+    [SerializeField] private float liftResponsiveness;
+   
+    private float tiltResponseModifier { get { return planeRb.mass / 10  * tiltResponsiveness; } }
+    private float turnResponseModifier { get { return planeRb.mass / 10 * turnResponsiveness; } }
+    private float liftResponseModifier { get { return planeRb.mass / 10 * liftResponsiveness; } }
+
     private float forwardSpeed;
     private float turnAmount;  // along the same plane (left or right rudder)
     private float tiltAmount;  // out of the plane (like the plane is flipping sideways)
@@ -54,9 +60,9 @@ public class PlaneController : MonoBehaviour
     private void MovePlaneRigidBody()
     {
         planeRb.AddForce(transform.right * forwardSpeed , ForceMode.Acceleration);
-        planeRb.AddTorque(transform.up * turnAmount * responseModifier, ForceMode.VelocityChange);
-        planeRb.AddTorque(-transform.right * liftAmount * responseModifier, ForceMode.VelocityChange);
-        planeRb.AddTorque(transform.forward * tiltAmount * responseModifier, ForceMode.VelocityChange);
+        planeRb.AddTorque(transform.up * turnAmount * turnResponseModifier, ForceMode.VelocityChange);
+        planeRb.AddTorque(-transform.right * liftAmount * liftResponseModifier, ForceMode.VelocityChange);
+        planeRb.AddTorque(transform.forward * tiltAmount * tiltResponseModifier, ForceMode.VelocityChange);
     }
 
 }
