@@ -960,7 +960,7 @@ GameObject:
   - component: {fileID: 7109022095815248229}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1029,7 +1029,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &7216603321854665768
@@ -1067,7 +1067,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxForwardSpeed: 100
   speedIncrement: 0.1
-  responsiveness: 10
+  tiltResponsiveness: 0.001
+  turnResponsiveness: 0.0005
+  liftResponsiveness: 0.001
 --- !u!1 &3434614116105796340
 GameObject:
   m_ObjectHideFlags: 0
