@@ -121,3 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ccb2114ef654948ab91b1841ff7204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ringEffect: {fileID: 7840787276084530674, guid: a36056ae8ec495645a4c4e62bc940f1b, type: 3}
