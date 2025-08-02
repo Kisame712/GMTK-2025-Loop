@@ -15,9 +15,17 @@ public class TutorialDialogManager : MonoBehaviour
     [SerializeField] private GameObject startButton;
 
     [SerializeField] private float typeSpeed;
+    public AudioClip[] audioClips;
+
+    AudioSource audioSource;
 
     private int eventCount = 0;
     string currText = "";
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     IEnumerator Type(string sentence)
     {
@@ -25,9 +33,18 @@ public class TutorialDialogManager : MonoBehaviour
         {
             textArea.text += letter;
             currText += letter;
+            if(charName.text == INSTRUCTOR_NAME)
+            {
+                audioSource.PlayOneShot(audioClips[0], 0.4f);
+            }
+            else if(charName.text == PLAYER_NAME)
+            {
+                audioSource.PlayOneShot(audioClips[1], 0.4f);
+            }
             yield return new WaitForSeconds(typeSpeed);
         }
     }
+
 
     private void Start()
     {
