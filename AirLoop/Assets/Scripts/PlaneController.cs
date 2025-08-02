@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlaneController : MonoBehaviour
 {
@@ -9,27 +11,32 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private float tiltResponsiveness;
     [SerializeField] private float turnResponsiveness;
     [SerializeField] private float liftResponsiveness;
-   
-    private float tiltResponseModifier { get { return planeRb.mass / 10  * tiltResponsiveness; } }
-    private float turnResponseModifier { get { return planeRb.mass / 10 * turnResponsiveness; } }
-    private float liftResponseModifier { get { return planeRb.mass / 10 * liftResponsiveness; } }
+    [SerializeField] private TextMeshProUGUI planeHUD;
+    [SerializeField] private float liftPower;
+    private float tiltResponseModifier { get { return (planeRb.mass / 10)  * tiltResponsiveness; } }
+    private float turnResponseModifier { get { return (planeRb.mass / 10) * turnResponsiveness; } }
+    private float liftResponseModifier { get { return (planeRb.mass / 10) * liftResponsiveness; } }
 
-    private float forwardSpeed;
+    private float throttle;
     private float turnAmount;  // along the same plane (left or right rudder)
     private float tiltAmount;  // out of the plane (like the plane is flipping sideways)
     private float liftAmount;  // out of plane (like the plane is making a loop literally)
+
+    
 
     Rigidbody planeRb;
 
     private void Awake()
     {
         planeRb = GetComponent<Rigidbody>();
+        transform.position = new Vector3(-97f, 3f, 0f);
     }
 
 
     private void Update()
     {
         PlaneRotation();
+        UpdateHUD();
     }
 
     private void PlaneRotation()
@@ -40,15 +47,15 @@ public class PlaneController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            forwardSpeed += speedIncrement;
+            throttle += speedIncrement;
         }
 
         else if (Input.GetKey(KeyCode.LeftControl))
         {
-            forwardSpeed -= speedIncrement;
+            throttle -= speedIncrement;
         }
 
-        forwardSpeed = Mathf.Clamp(forwardSpeed, 0, maxForwardSpeed);
+        throttle = Mathf.Clamp(throttle, 0, 100f);
      
     }
     
@@ -59,10 +66,28 @@ public class PlaneController : MonoBehaviour
 
     private void MovePlaneRigidBody()
     {
-        planeRb.AddForce(transform.right * forwardSpeed , ForceMode.Acceleration);
-        planeRb.AddTorque(transform.up * turnAmount * turnResponseModifier, ForceMode.VelocityChange);
-        planeRb.AddTorque(-transform.right * liftAmount * liftResponseModifier, ForceMode.VelocityChange);
-        planeRb.AddTorque(transform.forward * tiltAmount * tiltResponseModifier, ForceMode.VelocityChange);
+        planeRb.AddForce(transform.right * maxForwardSpeed * throttle);
+        planeRb.AddTorque(transform.up * turnAmount * turnResponseModifier);
+        planeRb.AddTorque(-transform.right * liftAmount * liftResponseModifier);
+        planeRb.AddTorque(transform.forward * tiltAmount * tiltResponseModifier);
+
+        planeRb.AddForce(Vector3.up * planeRb.linearVelocity.magnitude * liftPower);
+
     }
 
+    private void UpdateHUD()
+    { 
+        planeHUD.text = "Throttle : " + throttle.ToString("F0") + "%\n";
+        planeHUD.text += "Airspeed : " + (planeRb.linearVelocity.magnitude * 3.6f).ToString("F0") + "km/h\n";
+        planeHUD.text += "Altitude : " + transform.position.y.ToString("F0") + "m";
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Hazard")
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 }
