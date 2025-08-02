@@ -35,7 +35,7 @@ public class TutorialDialogManager : MonoBehaviour
             currText += letter;
             if(charName.text == INSTRUCTOR_NAME)
             {
-                audioSource.PlayOneShot(audioClips[0], 0.4f);
+                audioSource.PlayOneShot(audioClips[0], 0.2f);
             }
             else if(charName.text == PLAYER_NAME)
             {
