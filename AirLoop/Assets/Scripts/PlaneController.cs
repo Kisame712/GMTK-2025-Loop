@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlaneController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlaneController : MonoBehaviour
     [Header("Plane effects and UI")]
     [SerializeField] private TextMeshProUGUI planeHUD;
     [SerializeField] private Transform rotator;
+    [SerializeField] private GameObject smokeEffect;
     
     private float tiltResponseModifier { get { return (planeRb.mass / 10)  * tiltResponsiveness; } }
     private float turnResponseModifier { get { return (planeRb.mass / 10) * turnResponsiveness; } }
@@ -26,13 +28,14 @@ public class PlaneController : MonoBehaviour
     private float tiltAmount;  // out of the plane (like the plane is flipping sideways)
     private float liftAmount;  // out of plane (like the plane is making a loop literally)
 
-    
+    private bool isCrashed;
 
     Rigidbody planeRb;
     AudioSource audioSource;
 
     private void Awake()
     {
+        isCrashed = false;
         planeRb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         transform.position = new Vector3(-97f, 3f, 0f);
@@ -41,6 +44,10 @@ public class PlaneController : MonoBehaviour
 
     private void Update()
     {
+        if (isCrashed)
+        {
+            return;
+        }
         PlaneRotation();
         UpdateHUD();
 
@@ -71,6 +78,10 @@ public class PlaneController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (isCrashed)
+        {
+            return;
+        }
         MovePlaneRigidBody();
     }
 
@@ -96,8 +107,17 @@ public class PlaneController : MonoBehaviour
     {
         if(other.tag == "Hazard")
         {
-            Destroy(gameObject);
+            StartCoroutine(SmokeEffect());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    IEnumerator SmokeEffect()
+    {
+        isCrashed = true;
+        planeRb.linearVelocity = Vector3.zero;
+        
+        Instantiate(smokeEffect);
+        yield return new WaitForSeconds(2);
     }
 }
