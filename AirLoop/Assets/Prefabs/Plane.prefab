@@ -965,7 +965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1162415928760956365
 Transform:
   m_ObjectHideFlags: 0
@@ -1074,6 +1074,7 @@ MonoBehaviour:
   liftPower: 135
   planeHUD: {fileID: 0}
   rotator: {fileID: 2110553173791914097}
+  smokeEffect: {fileID: 2247601087343615302, guid: 0002d5c454fe76a4abd8961f089d0e36, type: 3}
 --- !u!82 &7220535610700349555
 AudioSource:
   m_ObjectHideFlags: 0
