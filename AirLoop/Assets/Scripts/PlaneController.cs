@@ -11,8 +11,12 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private float tiltResponsiveness;
     [SerializeField] private float turnResponsiveness;
     [SerializeField] private float liftResponsiveness;
-    [SerializeField] private TextMeshProUGUI planeHUD;
     [SerializeField] private float liftPower;
+
+    [Header("Plane effects and UI")]
+    [SerializeField] private TextMeshProUGUI planeHUD;
+    [SerializeField] private Transform rotator;
+    
     private float tiltResponseModifier { get { return (planeRb.mass / 10)  * tiltResponsiveness; } }
     private float turnResponseModifier { get { return (planeRb.mass / 10) * turnResponsiveness; } }
     private float liftResponseModifier { get { return (planeRb.mass / 10) * liftResponsiveness; } }
@@ -25,10 +29,12 @@ public class PlaneController : MonoBehaviour
     
 
     Rigidbody planeRb;
+    AudioSource audioSource;
 
     private void Awake()
     {
         planeRb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         transform.position = new Vector3(-97f, 3f, 0f);
     }
 
@@ -37,6 +43,10 @@ public class PlaneController : MonoBehaviour
     {
         PlaneRotation();
         UpdateHUD();
+
+        rotator.Rotate(Vector3.right * throttle);
+        audioSource.volume = (throttle * 0.01f)/2;
+
     }
 
     private void PlaneRotation()
