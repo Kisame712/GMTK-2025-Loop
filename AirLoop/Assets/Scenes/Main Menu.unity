@@ -2524,7 +2524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f061a60f59b84144ea37c0ea77588aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
+  musicSlider: {fileID: 1458467080}
 --- !u!1 &1532001196
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,6 +3242,10 @@ PrefabInstance:
     - target: {fileID: 3237328515496208024, guid: 2448cd63f63b13b4d9caa6d87e376bac, type: 3}
       propertyPath: m_Name
       value: Plane
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237328515496208024, guid: 2448cd63f63b13b4d9caa6d87e376bac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7109022095815248229, guid: 2448cd63f63b13b4d9caa6d87e376bac, type: 3}
       propertyPath: m_Enabled

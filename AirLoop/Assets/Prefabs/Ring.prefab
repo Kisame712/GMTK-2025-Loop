@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2573739833779162756}
   - component: {fileID: 1928580794356702119}
   - component: {fileID: 3276963716197313574}
+  - component: {fileID: 1832424763928971691}
   m_Layer: 0
   m_Name: Ring
   m_TagString: Untagged
@@ -122,3 +123,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ringEffect: {fileID: 7840787276084530674, guid: a36056ae8ec495645a4c4e62bc940f1b, type: 3}
+--- !u!95 &1832424763928971691
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394920728695993664}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcf3123aa8bcfcb41a7ce360c0df9a82, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

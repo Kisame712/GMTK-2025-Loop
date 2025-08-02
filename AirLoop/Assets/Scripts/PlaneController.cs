@@ -108,7 +108,7 @@ public class PlaneController : MonoBehaviour
         if(other.tag == "Hazard")
         {
             StartCoroutine(SmokeEffect());
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
         }
     }
 
@@ -116,8 +116,8 @@ public class PlaneController : MonoBehaviour
     {
         isCrashed = true;
         planeRb.linearVelocity = Vector3.zero;
-        
-        Instantiate(smokeEffect);
-        yield return new WaitForSeconds(2);
+        Instantiate(smokeEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
