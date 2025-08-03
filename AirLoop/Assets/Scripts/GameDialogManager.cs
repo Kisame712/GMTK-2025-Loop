@@ -36,7 +36,7 @@ public class GameDialogManager : MonoBehaviour
             currText += letter;
             if (charName.text == INSTRUCTOR_NAME)
             {
-                audioSource.PlayOneShot(audioClips[0], 0.2f);
+                audioSource.PlayOneShot(audioClips[0], 0.4f);
             }
             else if (charName.text == PLAYER_NAME)
             {
