@@ -1,52 +1,42 @@
 using UnityEngine;
 using TMPro;
-using System;
 using UnityEngine.SceneManagement;
 public class RingManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text ringsText;
-    Ring[] rings;
+    [SerializeField] private TimeManager timeManager;
     int totalRingCount;
+    public int currentRings;
 
-
+    public void Awake()
+    {
+        totalRingCount = FindObjectsByType<Ring>(FindObjectsSortMode.None).Length;
+    }
     private void Start()
     {
-        InitialTextDisplay();
-        Ring.OnAnyRingDestroyed += Ring_OnAnyRingDestroyed;
+        currentRings = 0;
+        UpdateRingsText();
     }
 
     private void Update()
     {
-        if(totalRingCount == rings.Length)
+        if(currentRings == totalRingCount)
         {
-            int score = TimeManager.Instance.GetScore();
-            ScoreTracker.Instance.SetScore(score);
             LevelComplete();
         }
     }
 
-    private void UpdateRingsText()
+    public void UpdateRingsText()
     {
-        
-        rings = FindObjectsByType<Ring>(FindObjectsSortMode.None);
-        ringsText.text = $"Rings - {( totalRingCount - rings.Length + 1)}/{totalRingCount}";
-        
-    }
-
-    private void Ring_OnAnyRingDestroyed(object sender, EventArgs e)
-    {
-        UpdateRingsText();
-    }
-
-    private void InitialTextDisplay()
-    {
-        rings = FindObjectsByType<Ring>(FindObjectsSortMode.None);
-        totalRingCount = rings.Length;
-        ringsText.text = $"Rings - 0/{totalRingCount}";
+        ringsText.text = $"Rings - {currentRings}/{totalRingCount}";
     }
 
     private void LevelComplete()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+       if(SceneManager.GetActiveScene().name == "Game")
+        {
+         ScoreTracker.Instance.SetScore(timeManager.GetScore());
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

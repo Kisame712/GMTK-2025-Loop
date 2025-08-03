@@ -24,4 +24,9 @@ public class ScoreTracker : MonoBehaviour
         playerScore = scoreAtLevelComplete;
     }
 
+    public int GetScore()
+    {
+        return playerScore;
+    }
+
 }

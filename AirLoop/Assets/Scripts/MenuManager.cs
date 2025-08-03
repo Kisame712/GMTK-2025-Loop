@@ -18,4 +18,9 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void ShowLeaderBoard()
+    {
+        SceneManager.LoadScene("ShowLeaderboard");
+    }
 }

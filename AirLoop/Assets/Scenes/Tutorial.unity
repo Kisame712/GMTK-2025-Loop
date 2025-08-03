@@ -190,7 +190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.799988, y: -12.599976}
+  m_AnchoredPosition: {x: 17.800049, y: -12.599976}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &71463393
@@ -906,6 +906,18 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 71463391}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 801998498}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2080,6 +2092,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3703158449383495077, guid: da7e5ac7124bbe64198b7d3ea0ab9954, type: 3}
   m_PrefabInstance: {fileID: 556153391}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &558186768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 558186770}
+  - component: {fileID: 558186769}
+  m_Layer: 0
+  m_Name: ScoreTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &558186769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558186768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2568f47c81a33240aa6e2247a0d6ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &558186770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558186768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &561402264
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2166,6 +2222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ring (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3276963716197313574, guid: e7febd7844f0e9e4c95066fc6e2ec463, type: 3}
+      propertyPath: ringManager
+      value: 
+      objectReference: {fileID: 801998499}
     - target: {fileID: 7517617763087014566, guid: e7febd7844f0e9e4c95066fc6e2ec463, type: 3}
       propertyPath: m_LocalPosition.x
       value: 600
@@ -2373,8 +2433,8 @@ MonoBehaviour:
   startButton: {fileID: 2127368659}
   typeSpeed: 0.02
   audioClips:
-  - {fileID: 8300000, guid: 6eb57a8bf1f91f24380fc4c29cdb6e0b, type: 3}
   - {fileID: 8300000, guid: b5a4e8ca4645fa14b8d238340af9c716, type: 3}
+  - {fileID: 8300000, guid: 18ef04bd76195d445bec5289c9894a61, type: 3}
 --- !u!1 &703746745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,7 +2593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &801998499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2547,6 +2607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ringsText: {fileID: 1861018077}
+  timeManager: {fileID: 2023200502}
+  currentRings: 0
 --- !u!4 &801998500
 Transform:
   m_ObjectHideFlags: 0
@@ -4803,7 +4865,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 661764984}
         m_TargetAssemblyTypeName: TutorialDialogManager, Assembly-CSharp
         m_MethodName: ContinueButton
         m_Mode: 1
@@ -5543,6 +5605,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 801998498}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2127368663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5724,6 +5798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ring
       objectReference: {fileID: 0}
+    - target: {fileID: 3276963716197313574, guid: e7febd7844f0e9e4c95066fc6e2ec463, type: 3}
+      propertyPath: ringManager
+      value: 
+      objectReference: {fileID: 801998499}
     - target: {fileID: 7517617763087014566, guid: e7febd7844f0e9e4c95066fc6e2ec463, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1000
@@ -5869,3 +5947,4 @@ SceneRoots:
   - {fileID: 963735894}
   - {fileID: 2023200503}
   - {fileID: 1807782963}
+  - {fileID: 558186770}
